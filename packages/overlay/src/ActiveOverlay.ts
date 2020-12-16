@@ -15,6 +15,7 @@ import {
     Placement,
     OverlayOpenDetail,
     TriggerInteractions,
+    OverlayOpenCloseDetail,
 } from './overlay-types.js';
 import { Scale, Color } from '@spectrum-web-components/theme';
 import {
@@ -180,6 +181,8 @@ export class ActiveOverlay extends SpectrumElement {
 
     private timeout?: number;
 
+    public closeDetail?: OverlayOpenCloseDetail;
+
     public static get styles(): CSSResultArray {
         return [styles];
     }
@@ -296,6 +299,7 @@ export class ActiveOverlay extends SpectrumElement {
         this.color = detail.theme.color;
         this.scale = detail.theme.scale;
         this.receivesFocus = detail.receivesFocus;
+        this.closeDetail = detail.openCloseDetail;
     }
 
     public dispose(): void {

@@ -31,6 +31,11 @@ export interface OverlayOpenDetail {
     trigger: HTMLElement;
     interaction: TriggerInteractions;
     theme: ThemeData;
+    openCloseDetail?: OverlayOpenCloseDetail;
+}
+
+export interface OverlayOpenCloseDetail {
+    interaction: TriggerInteractions;
 }
 
 /**
@@ -50,10 +55,13 @@ export type OverlayOptions = {
     placement?: Placement;
     offset?: number;
     receivesFocus?: 'auto';
+    openCloseDetail?: OverlayOpenCloseDetail;
 };
 
 declare global {
     interface GlobalEventHandlersEventMap {
         'sp-overlay-query': CustomEvent<OverlayDisplayQueryDetail>;
+        'sp-open': CustomEvent<OverlayOpenCloseDetail>;
+        'sp-close': CustomEvent<OverlayOpenCloseDetail>;
     }
 }

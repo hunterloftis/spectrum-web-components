@@ -94,6 +94,7 @@ export class Overlay {
         offset = 0,
         placement = 'top',
         receivesFocus,
+        openCloseDetail,
     }: OverlayOptions): Promise<boolean> {
         /* c8 ignore next */
         if (this.isOpen) return true;
@@ -135,6 +136,7 @@ export class Overlay {
             interaction: this.interaction,
             theme: queryThemeDetail,
             receivesFocus,
+            openCloseDetail,
             ...overlayDetailQuery,
         });
         this.isOpen = true;
@@ -148,3 +150,19 @@ export class Overlay {
         Overlay.overlayStack.closeOverlay(this.overlayElement);
     }
 }
+
+/**
+* Announces that an overlay-based UI element has opened
+* @event sp-open
+* @type {object}
+* @property {TriggerInteractions} interaction type of interaction that triggered the opening
+* @property {HTMLElement} content overlay content
+*/
+
+/**
+* Announces that an overlay-based UI element has opened
+* @event sp-close
+* @type {object}
+* @property {TriggerInteractions} interaction type of interaction that triggered the closing
+* @property {HTMLElement} content overlay content
+*/
