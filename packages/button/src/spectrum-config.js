@@ -60,11 +60,7 @@ const config = {
                     name: 'icon',
                 },
             ],
-            exclude: [
-                /\.spectrum-ActionButton/,
-                /\.spectrum-Button/,
-                /\.spectrum-ClearButton/,
-            ],
+            exclude: [/\.spectrum-Button/, /\.spectrum-ClearButton/],
             excludeSourceSelector: [
                 /^([^\s]*),([^\s]*),([^\s]*),([^\s]*),([^\s]*)$/,
             ],
@@ -109,6 +105,29 @@ const config = {
                         '.spectrum-Button--secondary',
                     ],
                 },
+                {
+                    type: 'enum',
+                    name: 'size',
+                    forceOntoHost: true,
+                    values: [
+                        {
+                            name: 's',
+                            selector: '.spectrum-Button--sizeS',
+                        },
+                        {
+                            name: 'm',
+                            selector: '.spectrum-Button--sizeM',
+                        },
+                        {
+                            name: 'l',
+                            selector: '.spectrum-Button--sizeL',
+                        },
+                        {
+                            name: 'xl',
+                            selector: '.spectrum-Button--sizeXL',
+                        },
+                    ],
+                },
             ],
             ids: ['.spectrum-Button-label'],
             slots: [
@@ -117,54 +136,7 @@ const config = {
                     selector: '.spectrum-Icon',
                 },
             ],
-            exclude: [/\.spectrum-ActionButton/, /\.spectrum-ClearButton/],
-            excludeSourceSelector: [/^(.*),(.*),(.*),(.*),(.*)$/],
-        },
-        {
-            name: 'action-button',
-            host: {
-                selector: '.spectrum-ActionButton',
-            },
-            attributes: [
-                {
-                    type: 'boolean',
-                    selector: '.spectrum-ActionButton--quiet',
-                },
-                {
-                    type: 'boolean',
-                    selector: '.is-disabled',
-                    name: 'disabled',
-                },
-                {
-                    type: 'boolean',
-                    name: 'selected',
-                    selector: '.is-selected',
-                },
-                {
-                    type: 'boolean',
-                    selector: ':active',
-                    name: 'active',
-                },
-                {
-                    type: 'boolean',
-                    name: 'emphasized',
-                    selector: '.spectrum-ActionButton--emphasized',
-                },
-            ],
-            ids: [
-                '.spectrum-ActionButton-label',
-                {
-                    name: 'hold-affordance',
-                    selector: '.spectrum-ActionButton-hold',
-                },
-            ],
-            slots: [
-                {
-                    name: 'icon',
-                    selector: '.spectrum-Icon',
-                },
-            ],
-            exclude: [/\.spectrum-Button/, /\.spectrum-ClearButton/],
+            exclude: [/\.spectrum-ClearButton/],
             excludeSourceSelector: [/^(.*),(.*),(.*),(.*),(.*)$/],
         },
         {
@@ -210,7 +182,7 @@ const config = {
                     selector: '.spectrum-Icon',
                 },
             ],
-            exclude: [/\.spectrum-ActionButton/, /\.spectrum-Button/],
+            exclude: [/\.spectrum-Button/],
             excludeSourceSelector: [/^(.*),(.*),(.*),(.*),(.*)$/],
         },
     ],
