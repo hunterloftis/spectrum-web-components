@@ -27,6 +27,7 @@ import {
     tabEvent,
     tEvent,
 } from '../../../test/testing-helpers.js';
+import { spy } from 'sinon';
 
 describe('Menu', () => {
     it('renders empty', async () => {
@@ -60,9 +61,10 @@ describe('Menu', () => {
         expect(document.activeElement === anchor, 'anchor').to.be.true;
     });
     it('renders w/ [disabled] menu items', async () => {
+        const focusinSpy = spy();
         const el = await fixture<Menu>(
             html`
-                <sp-menu tabindex="0">
+                <sp-menu tabindex="0" @focusin=${() => focusinSpy()}>
                     <sp-menu-item disabled>Disabled item</sp-menu-item>
                 </sp-menu>
             `
@@ -76,6 +78,35 @@ describe('Menu', () => {
         await elementUpdated(el);
         expect(document.activeElement === el, 'self not focused, 2').to.be
             .false;
+        expect(focusinSpy.callCount).to.equal(0);
+    });
+    it('renders w/ all [disabled] menu items', async () => {
+        const focusinSpy = spy();
+        const el = await fixture<Menu>(
+            html`
+                <sp-menu tabindex="0" @focusin=${() => focusinSpy()}>
+                    <sp-menu-item disabled>Disabled item 1</sp-menu-item>
+                    <sp-menu-item disabled>Disabled item 2</sp-menu-item>
+                </sp-menu>
+            `
+        );
+        const firstItem = el.querySelector('sp-menu-item') as MenuItem;
+
+        await elementUpdated(el);
+        expect(document.activeElement === el, 'self not focused, 1').to.be
+            .false;
+
+        el.focus();
+        await elementUpdated(el);
+        expect(document.activeElement === el, 'self not focused, 2').to.be
+            .false;
+        expect(focusinSpy.callCount).to.equal(0);
+        firstItem.focus();
+        await elementUpdated(el);
+        expect(document.activeElement === el, 'self not focused, 2').to.be
+            .false;
+        expect(focusinSpy.callCount).to.equal(0);
+        expect(el.matches(':focus-within')).to.be.false;
     });
     it('renders w/ menu items', async () => {
         const el = await fixture<Menu>(
