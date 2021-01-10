@@ -20,6 +20,7 @@ import '@spectrum-web-components/menu/sp-menu-item.js';
 import '@spectrum-web-components/menu/sp-menu-divider.js';
 import '@spectrum-web-components/icon/sp-icon.js';
 import { SettingsIcon } from '@spectrum-web-components/icons-workflow';
+import { logo } from './images';
 
 export default {
     title: 'Top Nav',
@@ -106,3 +107,32 @@ export const Selected = (): TemplateResult => {
         </sp-top-nav>
     `;
 };
+
+// https://spectrum.adobe.com/page/application-frame/#Application-mode
+// https://spectrum.adobe.com/page/headers/#Anatomy
+
+export const Modes = (): TemplateResult => {
+    return html`
+        <sp-top-nav>
+            <sp-action-button quiet href="/marketing-page" label="App">
+                <sp-icon slot="icon" src=${logo}></sp-icon>
+            </sp-action-button>
+            <sp-top-nav-item href="#">Design</sp-top-nav-item>
+            <sp-top-nav-item href='#prototype'>Prototype</sp-top-nav-item>
+            <sp-action-menu label="Account" style="margin-inline-start: auto;">
+                <sp-icon size="s" slot="icon">
+                    ${SettingsIcon()}
+                </sp-icon>
+                <sp-menu>
+                    <sp-menu-item>
+                        Profile
+                    </sp-menu-item>
+                    <sp-menu-divider></sp-menu-divider>
+                    <sp-menu-item>
+                        Sign Out
+                    </sp-menu-item>
+                </sp-menu>
+            </sp-action-menu>
+        </sp-top-nav>
+    `;
+}
