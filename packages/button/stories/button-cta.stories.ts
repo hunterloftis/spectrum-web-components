@@ -40,7 +40,7 @@ export const withIcon = (): TemplateResult => {
                 variant,
                 iconRight,
                 content: html`
-                    <sp-icon slot="icon" size="m">
+                    <sp-icon slot="icon">
                         ${HelpIcon({ hidden: true })}
                     </sp-icon>
                     Help
