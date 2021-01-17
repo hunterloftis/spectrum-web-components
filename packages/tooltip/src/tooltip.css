@@ -35,3 +35,25 @@ governing permissions and limitations under the License.
 :host([data-popper-placement*='bottom']) #tip {
     margin-left: 0;
 }
+
+:host([placement*='right']) #tip,
+:host([placement*='left']) #tip {
+    border: solid
+        var(
+            --spectrum-tooltip-tip-height,
+            var(--spectrum-global-dimension-size-50)
+        )
+        transparent;
+    border-left-color: var(
+        --spectrum-tooltip-background-color,
+        var(--spectrum-global-color-static-gray-700)
+    );
+}
+
+:host([placement*='left']) #tip {
+    transform: none;
+}
+
+:host([placement*='right']) #tip {
+    transform: scaleX(-1);
+}
