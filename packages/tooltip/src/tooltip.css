@@ -12,12 +12,63 @@ governing permissions and limitations under the License.
 
 @import './spectrum-tooltip.css';
 
-/* This is getting pulled out by PostCSS, maybe... */
+/* move the #tip styling from spectrum-css onto a pseudo-element,
+   replacing rotations with mirrors of two different border setups (horizontal vs vertical) */
+
 #tip {
-    border-right-color: transparent;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
+    border: none;
 }
+
+:host([placement*='right']) #tip,
+:host([placement*='left']) #tip,
+:host([placement*='bottom']) #tip {
+    transform: none;
+}
+
+:host #tip:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: solid
+        var(
+            --spectrum-tooltip-tip-height,
+            var(--spectrum-global-dimension-size-50)
+        )
+        transparent;
+}
+
+:host([placement*='top']) #tip:after,
+:host([placement*='bottom']) #tip:after {
+    border-top-color: var(
+        --spectrum-tooltip-background-color,
+        var(--spectrum-global-color-static-gray-700)
+    );
+}
+
+:host([placement*='right']) #tip:after,
+:host([placement*='left']) #tip:after {
+    border-left-color: var(
+        --spectrum-tooltip-background-color,
+        var(--spectrum-global-color-static-gray-700)
+    );
+}
+
+:host([placement*='bottom']) #tip:after {
+    bottom: 100%;
+    transform: scaleY(-1);
+}
+
+:host([placement*='left']) #tip:after {
+    left: 100%;
+}
+
+:host([placement*='right']) #tip:after {
+    right: 100%;
+    transform: scaleX(-1);
+}
+
+/* fix margins for popper */
 
 :host([data-popper-placement]) {
     margin-left: 0;
